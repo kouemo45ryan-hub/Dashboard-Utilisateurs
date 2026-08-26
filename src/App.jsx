@@ -3,9 +3,10 @@ import {useUser} from './store/userStore'
 import './App.css'
 import { useUsers } from './hooks/useUser'
 import { UserList } from './hooks/users/usersList'
+import { UserDetails } from './hooks/users/userDetails'
 function App() {
-  // const {users, setUsers} = useUser()
-  // console.log(users)
+
+  const {selectedUser, setSelectedUser} = useUser()
 
   const {data: users, isLoading, error} = useUsers()
 
@@ -13,12 +14,9 @@ function App() {
   if (error) return <p>Error: {error}</p>
 
   return (
-    <div className="border border-gray-200 rounded-lg p-4 shadow-sm bg-slate-950">
-      <UserList users={users}/>
-      {/* <button
-      onClick={() => setUsers([{id:1, name:'john'}, {id:2, name:'jane'}])}>
-        Add User
-      </button> */}
+    <div className=" flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm bg-slate-950">
+      <UserList users={users} onUserSelect={setSelectedUser}/>
+      {selectedUser && <UserDetails user = {selectedUser} onClose = {()=> setSelectedUser(null)}/>}
     </div>
   )
 }

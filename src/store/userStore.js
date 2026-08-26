@@ -9,5 +9,5 @@ export const useUser = create ((set) =>({
     setUsers : (users) => set({users}),
     setLoading: (loading) => set({loading}),
     setError : (error) => set({error}),
-    setSelectedUser : (selectedUser) => set({selectedUser})
+    setSelectedUser : (user) => set( {selectedUser : user})
 }))
